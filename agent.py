@@ -94,9 +94,9 @@ class BrowserAgent:
         # Add your own custom functions here.
         custom_functions = [
             # For example:
-            types.FunctionDeclaration.from_callable(
-                client=self._client, callable=multiply_numbers
-            )
+            #types.FunctionDeclaration.from_callable(
+            #    client=self._client, callable=multiply_numbers
+            #)
         ]
 
         self._generate_content_config = GenerateContentConfig(

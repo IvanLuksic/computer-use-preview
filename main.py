@@ -12,13 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import argparse
-import os
-
 from agent import BrowserAgent
-from computers import BrowserbaseComputer, PlaywrightComputer
+from computers import BrowserbaseComputer, PlaywrightComputer, DaytonaComputer
 
-
-PLAYWRIGHT_SCREEN_SIZE = (1440, 900)
+#Changing size from 1024x768 can cause issues with some environments
+SCREEN_SIZE = (1024, 768)
 
 
 def main() -> int:
@@ -33,14 +31,14 @@ def main() -> int:
     parser.add_argument(
         "--env",
         type=str,
-        choices=("playwright", "browserbase"),
+        choices=("playwright", "browserbase", "daytona"),
         default="playwright",
         help="The computer use environment to use.",
     )
     parser.add_argument(
         "--initial_url",
         type=str,
-        default="https://www.google.com",
+        default="https://www.duckduckgo.com",
         help="The inital URL loaded for the computer.",
     )
     parser.add_argument(
@@ -58,14 +56,19 @@ def main() -> int:
 
     if args.env == "playwright":
         env = PlaywrightComputer(
-            screen_size=PLAYWRIGHT_SCREEN_SIZE,
+            screen_size=SCREEN_SIZE,
             initial_url=args.initial_url,
             highlight_mouse=args.highlight_mouse,
         )
     elif args.env == "browserbase":
         env = BrowserbaseComputer(
-            screen_size=PLAYWRIGHT_SCREEN_SIZE,
+            screen_size=SCREEN_SIZE,
             initial_url=args.initial_url
+        )
+    elif args.env == "daytona":
+        env = DaytonaComputer(
+            screen_size=SCREEN_SIZE,
+            initial_url=args.initial_url,
         )
     else:
         raise ValueError("Unknown environment: ", args.env)

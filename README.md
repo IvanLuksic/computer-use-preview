@@ -2,7 +2,7 @@
 
 ## Quick Start
 
-This section will guide you through setting up and running the Computer Use Preview model, either the Gemini Developer API or Vertex AI. Follow these steps to get started.
+This section will guide you through setting up and running the Computer Use Preview model. Follow these steps to get started.
 
 ### 1. Installation
 
@@ -22,6 +22,7 @@ pip install -r requirements.txt
 ```
 
 **Install Playwright and Browser Dependencies**
+> **Note:** Skip this section if you're using Daytona.
 
 ```bash
 # Install system dependencies required by Playwright for Chrome
@@ -94,6 +95,7 @@ You can specify a particular environment with the ```--env <environment>``` flag
 
 - `playwright`: Runs the browser locally using Playwright.
 - `browserbase`: Connects to a Browserbase instance.
+- `daytona`: Connects to a Daytona sandbox environment for remote computer use.
 
 **Local Playwright**
 
@@ -117,6 +119,14 @@ Runs the agent using Browserbase as the browser backend. Ensure the proper Brows
 python main.py --query="Go to Google and type 'Hello World' into the search bar" --env="browserbase"
 ```
 
+**Daytona**
+
+Runs the agent using Daytona sandbox as the backend. Ensure the `DAYTONA_API_KEY` environment variable is set and you have installed the Daytona SDK:
+
+```bash
+python main.py --query="Go to Google and type 'Hello World' into the search bar" --env="daytona"
+```
+
 ## Agent CLI
 
 The `main.py` script is the command-line interface (CLI) for running the browser agent.
@@ -126,8 +136,8 @@ The `main.py` script is the command-line interface (CLI) for running the browser
 | Argument | Description | Required | Default | Supported Environment(s) |
 |-|-|-|-|-|
 | `--query` | The natural language query for the browser agent to execute. | Yes | N/A | All |
-| `--env` | The computer use environment to use. Must be one of the following: `playwright`, or `browserbase` | No | N/A | All |
-| `--initial_url` | The initial URL to load when the browser starts. | No | https://www.google.com | All |
+| `--env` | The computer use environment to use. Must be one of the following: `playwright`, `browserbase`, or `daytona` | No | `playwright` | All |
+| `--initial_url` | The initial URL to load when the browser starts. | No | https://www.duckduckgo.com | All |
 | `--highlight_mouse` | If specified, the agent will attempt to highlight the mouse cursor's position in the screenshots. This is useful for visual debugging. | No | False (not highlighted) | `playwright` |
 
 ### Environment Variables
@@ -137,7 +147,7 @@ The `main.py` script is the command-line interface (CLI) for running the browser
 | GEMINI_API_KEY | Your API key for the Gemini model. | Yes |
 | BROWSERBASE_API_KEY | Your API key for Browserbase. | Yes (when using the browserbase environment) |
 | BROWSERBASE_PROJECT_ID | Your Project ID for Browserbase. | Yes (when using the browserbase environment) |
-
+| DAYTONA_API_KEY | Your API key for Daytona. | Yes (when using the daytona environment) |
 ## Known Issues
 
 ### Playwright Dropdown Menu

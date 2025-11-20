@@ -35,7 +35,7 @@ class TestMain(unittest.TestCase):
         main.main()
 
         mock_playwright_computer.assert_called_once_with(
-            screen_size=main.PLAYWRIGHT_SCREEN_SIZE,
+            screen_size=main.SCREEN_SIZE,
             initial_url='test_url',
             highlight_mouse=True
         )
@@ -59,7 +59,7 @@ class TestMain(unittest.TestCase):
         main.main()
 
         mock_browserbase_computer.assert_called_once_with(
-            screen_size=main.PLAYWRIGHT_SCREEN_SIZE,
+            screen_size=main.SCREEN_SIZE,
             initial_url='test_url'
         )
         mock_browser_agent.assert_called_once()
